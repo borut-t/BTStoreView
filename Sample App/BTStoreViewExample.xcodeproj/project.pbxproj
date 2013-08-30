@@ -17,8 +17,10 @@
 		BFA616D617D07EBA004EF888 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA616D517D07EBA004EF888 /* Default@2x.png */; };
 		BFA616D817D07EBA004EF888 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA616D717D07EBA004EF888 /* Default-568h@2x.png */; };
 		BFA616DB17D07EBA004EF888 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA616DA17D07EBA004EF888 /* ViewController.m */; };
-		BFA616DE17D07EBA004EF888 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA616DC17D07EBA004EF888 /* ViewController_iPhone.xib */; };
-		BFA616E117D07EBA004EF888 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA616DF17D07EBA004EF888 /* ViewController_iPad.xib */; };
+		BFA616DE17D07EBA004EF888 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA616DC17D07EBA004EF888 /* ViewController.xib */; };
+		BFA616EB17D07F84004EF888 /* BTStoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA616EA17D07F84004EF888 /* BTStoreView.m */; };
+		BFA616F417D086EF004EF888 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA616F317D086EF004EF888 /* bg.png */; };
+		BFA616F617D087E2004EF888 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA616F517D087E2004EF888 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,8 +39,11 @@
 		BFA616D717D07EBA004EF888 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BFA616D917D07EBA004EF888 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		BFA616DA17D07EBA004EF888 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		BFA616DD17D07EBA004EF888 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
-		BFA616E017D07EBA004EF888 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		BFA616DD17D07EBA004EF888 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		BFA616E917D07F84004EF888 /* BTStoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTStoreView.h; sourceTree = "<group>"; };
+		BFA616EA17D07F84004EF888 /* BTStoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTStoreView.m; sourceTree = "<group>"; };
+		BFA616F317D086EF004EF888 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		BFA616F517D087E2004EF888 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA616F617D087E2004EF888 /* StoreKit.framework in Frameworks */,
 				BFA616C217D07EBA004EF888 /* UIKit.framework in Frameworks */,
 				BFA616C417D07EBA004EF888 /* Foundation.framework in Frameworks */,
 				BFA616C617D07EBA004EF888 /* CoreGraphics.framework in Frameworks */,
@@ -75,6 +81,7 @@
 		BFA616C017D07EBA004EF888 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFA616F517D087E2004EF888 /* StoreKit.framework */,
 				BFA616C117D07EBA004EF888 /* UIKit.framework */,
 				BFA616C317D07EBA004EF888 /* Foundation.framework */,
 				BFA616C517D07EBA004EF888 /* CoreGraphics.framework */,
@@ -85,13 +92,13 @@
 		BFA616C717D07EBA004EF888 /* BTStoreViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				BFA616E717D07EEE004EF888 /* BTStoreView */,
+				BFA616E817D07F84004EF888 /* BTStoreView */,
 				BFA616D017D07EBA004EF888 /* AppDelegate.h */,
 				BFA616D117D07EBA004EF888 /* AppDelegate.m */,
 				BFA616D917D07EBA004EF888 /* ViewController.h */,
 				BFA616DA17D07EBA004EF888 /* ViewController.m */,
-				BFA616DC17D07EBA004EF888 /* ViewController_iPhone.xib */,
-				BFA616DF17D07EBA004EF888 /* ViewController_iPad.xib */,
+				BFA616DC17D07EBA004EF888 /* ViewController.xib */,
+				BFA616EC17D08630004EF888 /* Images */,
 				BFA616C817D07EBA004EF888 /* Supporting Files */,
 			);
 			path = BTStoreViewExample;
@@ -111,12 +118,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BFA616E717D07EEE004EF888 /* BTStoreView */ = {
+		BFA616E817D07F84004EF888 /* BTStoreView */ = {
 			isa = PBXGroup;
 			children = (
+				BFA616E917D07F84004EF888 /* BTStoreView.h */,
+				BFA616EA17D07F84004EF888 /* BTStoreView.m */,
 			);
 			name = BTStoreView;
 			path = ../../BTStoreView;
+			sourceTree = "<group>";
+		};
+		BFA616EC17D08630004EF888 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BFA616F317D086EF004EF888 /* bg.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,8 +191,8 @@
 				BFA616D417D07EBA004EF888 /* Default.png in Resources */,
 				BFA616D617D07EBA004EF888 /* Default@2x.png in Resources */,
 				BFA616D817D07EBA004EF888 /* Default-568h@2x.png in Resources */,
-				BFA616DE17D07EBA004EF888 /* ViewController_iPhone.xib in Resources */,
-				BFA616E117D07EBA004EF888 /* ViewController_iPad.xib in Resources */,
+				BFA616DE17D07EBA004EF888 /* ViewController.xib in Resources */,
+				BFA616F417D086EF004EF888 /* bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +206,7 @@
 				BFA616CE17D07EBA004EF888 /* main.m in Sources */,
 				BFA616D217D07EBA004EF888 /* AppDelegate.m in Sources */,
 				BFA616DB17D07EBA004EF888 /* ViewController.m in Sources */,
+				BFA616EB17D07F84004EF888 /* BTStoreView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,20 +221,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		BFA616DC17D07EBA004EF888 /* ViewController_iPhone.xib */ = {
+		BFA616DC17D07EBA004EF888 /* ViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BFA616DD17D07EBA004EF888 /* en */,
 			);
-			name = ViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		BFA616DF17D07EBA004EF888 /* ViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BFA616E017D07EBA004EF888 /* en */,
-			);
-			name = ViewController_iPad.xib;
+			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "BTStoreView.h"
 
 @interface ViewController ()
+
+- (IBAction)openAppStore:(id)sender;
 
 @end
 
@@ -24,6 +27,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+- (void)openAppStore:(id)sender
+{
+    [[BTStoreView sharedInstance] openAppStorePageForAppId:364709193];
 }
 
 @end
