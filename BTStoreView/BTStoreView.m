@@ -1,7 +1,7 @@
 //
 //  BTStoreView.m
 //
-//  Version 1.0.0
+//  Version 1.1
 //
 //  Created by Borut Tomazin on 8/30/2013.
 //  Copyright 2013 Borut Tomazin
@@ -78,8 +78,8 @@
         //get root view controller
         UIViewController *rootViewController = nil;
         id appDelegate = [[UIApplication sharedApplication] delegate];
-        if ([appDelegate respondsToSelector:@selector(viewController)]) {
-            rootViewController = [appDelegate valueForKey:@"viewController"];
+        if ([appDelegate respondsToSelector:@selector(viewControllers)]) {
+            rootViewController = [appDelegate viewControllers][0];
         }
         if (!rootViewController && [appDelegate respondsToSelector:@selector(window)]) {
             UIWindow *window = [appDelegate valueForKey:@"window"];

@@ -1,6 +1,6 @@
 BTStoreView
 
-Version 1.0.0, August 30th, 2013
+Version 1.1, August 30th, 2013
 
 Copyright (C) 2013 Borut Tomazin
 
