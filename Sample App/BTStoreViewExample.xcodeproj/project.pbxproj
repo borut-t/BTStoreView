@@ -19,7 +19,6 @@
 		BFA616DB17D07EBA004EF888 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA616DA17D07EBA004EF888 /* ViewController.m */; };
 		BFA616DE17D07EBA004EF888 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFA616DC17D07EBA004EF888 /* ViewController.xib */; };
 		BFA616EB17D07F84004EF888 /* BTStoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA616EA17D07F84004EF888 /* BTStoreView.m */; };
-		BFA616F417D086EF004EF888 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA616F317D086EF004EF888 /* bg.png */; };
 		BFA616F617D087E2004EF888 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA616F517D087E2004EF888 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +41,6 @@
 		BFA616DD17D07EBA004EF888 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		BFA616E917D07F84004EF888 /* BTStoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTStoreView.h; sourceTree = "<group>"; };
 		BFA616EA17D07F84004EF888 /* BTStoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTStoreView.m; sourceTree = "<group>"; };
-		BFA616F317D086EF004EF888 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		BFA616F517D087E2004EF888 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -98,7 +96,6 @@
 				BFA616D917D07EBA004EF888 /* ViewController.h */,
 				BFA616DA17D07EBA004EF888 /* ViewController.m */,
 				BFA616DC17D07EBA004EF888 /* ViewController.xib */,
-				BFA616EC17D08630004EF888 /* Images */,
 				BFA616C817D07EBA004EF888 /* Supporting Files */,
 			);
 			path = BTStoreViewExample;
@@ -126,14 +123,6 @@
 			);
 			name = BTStoreView;
 			path = ../../BTStoreView;
-			sourceTree = "<group>";
-		};
-		BFA616EC17D08630004EF888 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				BFA616F317D086EF004EF888 /* bg.png */,
-			);
-			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,7 +181,6 @@
 				BFA616D617D07EBA004EF888 /* Default@2x.png in Resources */,
 				BFA616D817D07EBA004EF888 /* Default-568h@2x.png in Resources */,
 				BFA616DE17D07EBA004EF888 /* ViewController.xib in Resources */,
-				BFA616F417D086EF004EF888 /* bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,10 +281,12 @@
 		BFA616E517D07EBA004EF888 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BTStoreViewExample/BTStoreViewExample-Prefix.pch";
 				INFOPLIST_FILE = "BTStoreViewExample/BTStoreViewExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -305,10 +295,12 @@
 		BFA616E617D07EBA004EF888 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BTStoreViewExample/BTStoreViewExample-Prefix.pch";
 				INFOPLIST_FILE = "BTStoreViewExample/BTStoreViewExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

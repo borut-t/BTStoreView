@@ -33,7 +33,7 @@
 #import "BTStoreView.h"
 #import <StoreKit/StoreKit.h>
 
-#define appStoreUrl @"itms-apps://itunes.apple.com/us/app/id%u?mt=8"
+#define appStoreUrl @"itms-apps://itunes.apple.com/us/app/id%ld?mt=8"
 
 @implementation BTStoreView
 
@@ -103,7 +103,7 @@
     }
     
     // Open app in AppStore via direct url
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:appStoreUrl, appId]]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:appStoreUrl, (long)appId]]];
 }
 
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)controller
