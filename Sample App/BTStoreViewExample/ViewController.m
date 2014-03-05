@@ -62,4 +62,9 @@
     [self BTStoreViewDidDismiss];
 }
 
+- (void)BTStoreViewFailedToOpenInAppStore
+{
+    [self BTStoreViewDidDismiss];
+}
+
 @end
