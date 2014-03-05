@@ -18,6 +18,10 @@ iOS 5+
 Add `pod ‘BTStoreView’` to your Podfile or drag class files (BTStoreView.{h,m}) into your project.
 
 
+## Notice
+Presenting StoreKit when running app in simulator is not possible since iOS 7+.
+
+
 ## Methods
 	+ (instancetype)sharedInstance;
 
