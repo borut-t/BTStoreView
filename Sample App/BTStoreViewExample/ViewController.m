@@ -32,6 +32,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    #if TARGET_IPHONE_SIMULATOR
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Notice!"
+                                                        message:@"Presenting App Store is not supported in simulator. Use device to test it."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil, nil];
+    [alertView show];
+    #endif
+}
+
 
 
 #pragma mark - Custom methods
