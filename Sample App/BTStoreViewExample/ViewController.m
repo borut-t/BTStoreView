@@ -9,7 +9,10 @@
 #import "ViewController.h"
 #import "BTStoreView.h"
 
-@interface ViewController ()
+@interface ViewController () <BTStoreViewDelegate>
+
+@property (nonatomic, strong) IBOutlet UIButton *button;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIncidator;
 
 - (IBAction)openAppStore:(id)sender;
 
@@ -31,9 +34,32 @@
 
 
 
+#pragma mark - Custom methods
 - (void)openAppStore:(id)sender
 {
-    [[BTStoreView sharedInstance] openAppStorePageForAppId:364709193];
+    self.button.hidden = YES;
+    self.loadingIncidator.hidden = NO;
+    
+    [BTStoreView sharedInstance].delegate = self;
+    [[BTStoreView sharedInstance] openAppStorePageForAppId:548265827];
+}
+
+
+
+#pragma mark - BTStoreView delegate methods
+- (void)BTStoreViewDidAppear
+{
+}
+
+- (void)BTStoreViewDidDismiss
+{
+    self.button.hidden = NO;
+    self.loadingIncidator.hidden = YES;
+}
+
+- (void)BTStoreViewFailedToPresentWithinApp
+{
+    [self BTStoreViewDidDismiss];
 }
 
 @end

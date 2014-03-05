@@ -151,7 +151,7 @@
 		BFA616B617D07EBA004EF888 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Borut Tomažin";
 			};
 			buildConfigurationList = BFA616B917D07EBA004EF888 /* Build configuration list for PBXProject "BTStoreViewExample" */;
@@ -281,7 +281,6 @@
 		BFA616E517D07EBA004EF888 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BTStoreViewExample/BTStoreViewExample-Prefix.pch";
@@ -295,7 +294,6 @@
 		BFA616E617D07EBA004EF888 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BTStoreViewExample/BTStoreViewExample-Prefix.pch";
