@@ -1,7 +1,7 @@
 //
 //  BTStoreView.h
 //
-//  Version 1.1
+//  Version 1.2
 //
 //  Created by Borut Tomazin on 8/30/2013.
 //  Copyright 2013 Borut Tomazin
@@ -32,10 +32,48 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol BTStoreViewDelegate <NSObject>
+@optional
+
+/**
+ Delegate method when BTStoreView is presented.
+ */
+- (void)BTStoreViewDidAppear;
+
+/**
+ Delegate method when BTStoreView is dismissed.
+ */
+- (void)BTStoreViewDidDismiss;
+
+/**
+ Delegate method when BTStoreView failed to open App Store inside app.
+ */
+- (void)BTStoreViewFailedToPresentWithinApp;
+
+@end
+
+
 @interface BTStoreView : NSObject
 
-+ (id)sharedInstance;
+/**
+ BTStoreView singleton method.
+ */
++ (instancetype)sharedInstance;
 
+/**
+ BTStoreView Delegate object.
+ */
+@property (nonatomic, weak) id<BTStoreViewDelegate> delegate;
+
+/**
+ Resets [UINavigationBar appearance] protocol property barTintColor to system default value. (default YES).
+ */
+@property (nonatomic, assign) BOOL shouldDiscardCustomTintColor;
+
+/**
+ Opens App Store page for passed appId.
+ @param appId The App Store application ID to look for.
+ */
 - (void)openAppStorePageForAppId:(NSInteger)appId;
 
 @end

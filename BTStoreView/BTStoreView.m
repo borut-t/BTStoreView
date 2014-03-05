@@ -1,7 +1,7 @@
 //
 //  BTStoreView.m
 //
-//  Version 1.1
+//  Version 1.2
 //
 //  Created by Borut Tomazin on 8/30/2013.
 //  Copyright 2013 Borut Tomazin
@@ -33,11 +33,11 @@
 #import "BTStoreView.h"
 #import <StoreKit/StoreKit.h>
 
-#define appStoreUrl @"itms-apps://itunes.apple.com/us/app/id%ld?mt=8"
+NSString *const AppStoreUrl = @"itms-apps://itunes.apple.com/us/app/id%ld?mt=8";
 
 @implementation BTStoreView
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
     static BTStoreView *sharedInstance = nil;
     static dispatch_once_t onceToken;
@@ -47,68 +47,92 @@
     return sharedInstance;
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup
+{
+    self.shouldDiscardCustomTintColor = YES;
+}
+
 - (void)openAppStorePageForAppId:(NSInteger)appId
 {
     if ([SKStoreProductViewController class]) {
+        SKStoreProductViewController *storeProductViewController = [SKStoreProductViewController new];
+        storeProductViewController.delegate = (id<SKStoreProductViewControllerDelegate>)self;
         
-        //create store view controller
-        SKStoreProductViewController *productController = [[SKStoreProductViewController alloc] init];
-        productController.delegate = (id<SKStoreProductViewControllerDelegate>)self;
-        
-        //set this to reset navigationBar background and tint color
-        [productController.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        [productController.navigationController.navigationBar setTintColor:nil];
+        if (self.shouldDiscardCustomTintColor) {
+            [storeProductViewController.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+            [storeProductViewController.navigationController.navigationBar setTintColor:nil];
+        }
         
         //load product details
-        NSDictionary *productParameters = @{SKStoreProductParameterITunesItemIdentifier:[@(appId) description]};
-        [productController loadProductWithParameters:productParameters completionBlock:^(BOOL result, NSError *error) {
-            
-            if (!result) {
-                if (error) {
-                    NSLog(@"BTStoreView presentation failed: %@", [error localizedDescription]);
+        NSDictionary *productParameters = @{SKStoreProductParameterITunesItemIdentifier:@(appId).description};
+        [storeProductViewController loadProductWithParameters:productParameters completionBlock:^(BOOL result, NSError *error) {
+            if (result) {
+                UIViewController *rootViewController = nil;
+                id appDelegate = [[UIApplication sharedApplication] delegate];
+                
+                if ([appDelegate respondsToSelector:@selector(viewControllers)]) {
+                    rootViewController = [appDelegate viewControllers][0];
+                }
+                if (!rootViewController && [appDelegate respondsToSelector:@selector(window)]) {
+                    rootViewController = [(UIWindow *)[appDelegate valueForKey:@"window"] rootViewController];
+                }
+                if (!rootViewController) {
+                    rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+                }
+                if (rootViewController) {
+                    if ([self.delegate respondsToSelector:@selector(BTStoreViewFailedToPresentWithinApp)]) {
+                        NSLog(@"BTStoreView: Failed to present withing app. Fallback to the App Store app.");
+                        [self.delegate BTStoreViewFailedToPresentWithinApp];
+                    }
                 }
                 else {
-                    NSLog(@"Could not present BTStoreView because of an unknown error!");
+                    while (rootViewController.presentedViewController) {
+                        rootViewController = rootViewController.presentedViewController;
+                    }
+                    
+                    [rootViewController presentViewController:storeProductViewController animated:YES completion:nil];
+                    [self didAppear];
+                    return;
                 }
-                
-                return;
-            }
-        }];
-        
-        //get root view controller
-        UIViewController *rootViewController = nil;
-        id appDelegate = [[UIApplication sharedApplication] delegate];
-        if ([appDelegate respondsToSelector:@selector(viewControllers)]) {
-            rootViewController = [appDelegate viewControllers][0];
-        }
-        if (!rootViewController && [appDelegate respondsToSelector:@selector(window)]) {
-            UIWindow *window = [appDelegate valueForKey:@"window"];
-            rootViewController = window.rootViewController;
-        }
-        if (!rootViewController) {
-            UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            rootViewController = window.rootViewController;
-        }
-        if (!rootViewController) {
-            NSLog(@"BTStoreView could not find root view controller to present store view!");
-        }
-        else {
-            while (rootViewController.presentedViewController) {
-                rootViewController = rootViewController.presentedViewController;
             }
             
-            [rootViewController presentViewController:productController animated:YES completion:nil];
-            return;
-        }
+            [self showAppStoreAppID:appId];
+        }];
     }
-    
-    // Open app in AppStore via direct url
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:appStoreUrl, (long)appId]]];
+    else {
+        [self showAppStoreAppID:appId];
+    }
+}
+
+- (void)showAppStoreAppID:(NSInteger)appId
+{
+    // Fallback: Open app in AppStore via direct url
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:AppStoreUrl, (long)appId]]];
+    [self didAppear];
+}
+
+- (void)didAppear
+{
+    if ([self.delegate respondsToSelector:@selector(BTStoreViewDidAppear)]) {
+        [self.delegate BTStoreViewDidAppear];
+    }
 }
 
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)controller
 {
     [controller.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+    if ([self.delegate respondsToSelector:@selector(BTStoreViewDidDismiss)]) {
+        [self.delegate BTStoreViewDidDismiss];
+    }
 }
 
 @end
