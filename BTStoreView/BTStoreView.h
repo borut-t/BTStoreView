@@ -50,6 +50,11 @@
  */
 - (void)BTStoreViewFailedToPresentWithinApp;
 
+/**
+ Delegate method when BTStoreView failed to open in an App Store app.
+ */
+- (void)BTStoreViewFailedToOpenInAppStore;
+
 @end
 
 

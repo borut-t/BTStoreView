@@ -35,6 +35,10 @@
 
 NSString *const AppStoreUrl = @"itms-apps://itunes.apple.com/us/app/id%ld?mt=8";
 
+@interface BTStoreView ()
+
+@end
+
 @implementation BTStoreView
 
 + (instancetype)sharedInstance
@@ -88,9 +92,9 @@ NSString *const AppStoreUrl = @"itms-apps://itunes.apple.com/us/app/id%ld?mt=8";
                 if (!rootViewController) {
                     rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
                 }
-                if (rootViewController) {
+                if (!rootViewController) {
+                    NSLog(@"BTStoreView: Failed to present within app. Fallback to the App Store app.");
                     if ([self.delegate respondsToSelector:@selector(BTStoreViewFailedToPresentWithinApp)]) {
-                        NSLog(@"BTStoreView: Failed to present withing app. Fallback to the App Store app.");
                         [self.delegate BTStoreViewFailedToPresentWithinApp];
                     }
                 }
@@ -104,6 +108,9 @@ NSString *const AppStoreUrl = @"itms-apps://itunes.apple.com/us/app/id%ld?mt=8";
                     return;
                 }
             }
+            else {
+                NSLog(@"BTStoreView: Failed to present within app: '%@'. Fallback to the App Store app.",error.localizedDescription);
+            }
             
             [self showAppStoreAppID:appId];
         }];
@@ -116,7 +123,14 @@ NSString *const AppStoreUrl = @"itms-apps://itunes.apple.com/us/app/id%ld?mt=8";
 - (void)showAppStoreAppID:(NSInteger)appId
 {
     // Fallback: Open app in AppStore via direct url
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:AppStoreUrl, (long)appId]]];
+    if (![[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:AppStoreUrl, (long)appId]]]) {
+        NSLog(@"BTStoreView: Failed to open in an App Store app.");
+        if ([self.delegate respondsToSelector:@selector(BTStoreViewFailedToOpenInAppStore)]) {
+            [self.delegate BTStoreViewFailedToOpenInAppStore];
+        }
+        return;
+    }
+    
     [self didAppear];
 }
 
@@ -127,6 +141,8 @@ NSString *const AppStoreUrl = @"itms-apps://itunes.apple.com/us/app/id%ld?mt=8";
     }
 }
 
+
+#pragma mark - SKStoreProduct Delegate
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)controller
 {
     [controller.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
