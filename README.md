@@ -50,3 +50,7 @@ Delegate method when BTStoreView is dismissed.
 	- (void)BTStoreViewFailedToPresentWithinApp;
 
 Delegate method when BTStoreView failed to open App Store inside app.
+
+	- (void)BTStoreViewFailedToOpenInAppStore;
+
+Delegate method when BTStoreView failed to open in an App Store app.
